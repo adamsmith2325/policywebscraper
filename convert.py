@@ -1,14 +1,14 @@
-#!/usr/bin/env python
+import os.path
+import pdfminer
+from pdfminer.cmapdb import convert_cmap
 from setuptools import setup
 from setuptools.command.install import install
-from pdfminer import __version__
+from pdfminer import *
 
 class install_cmap(install):
 
     def run(self):
-        import os.path
-        import pdfminer
-        from pdfminer.cmapdb import convert_cmap
+
         outdir = os.path.join(os.path.join(self.install_lib, 'pdfminer'), 'cmap')
         print('installing cmap: %r...' % outdir)
         os.makedirs(outdir, exist_ok=True)
@@ -32,42 +32,44 @@ class install_cmap(install):
         install.run(self)
         return
 
-with open('README.md') as fp:
-    long_description = fp.read()
+def convertFile(file):
+    with open(file) as fp:
+        long_description = fp.read()
 
-setup(
-    cmdclass = { 'install': install_cmap },
-    name = 'pdfminer',
-    version = __version__,
-    description = 'PDF parser and analyzer',
-    long_description = long_description,
-    long_description_content_type = 'text/markdown',
-    license = 'MIT',
-    author = 'Yusuke Shinyama',
-    author_email = 'yusuke@shinyama.jp',
-    url = 'http://github.com/euske/pdfminer',
-    packages = [
-        'pdfminer',
-    ],
-    python_requires = '>=3.6',
-    install_requires = [
-        'pycryptodome',
-    ],
-    scripts = [
-        'tools/pdf2txt.py',
-        'tools/dumppdf.py',
-    ],
-    keywords = [
-        'pdf parser',
-        'pdf converter',
-        'layout analysis',
-        'text mining'
-    ],
-    classifiers = [
-        'Development Status :: 4 - Beta',
-        'Environment :: Console',
-        'Intended Audience :: Developers',
-        'Intended Audience :: Science/Research',
-        'License :: OSI Approved :: MIT License',
-        'Topic :: Text Processing',
-    ],
+    setup(
+        cmdclass = { 'install': install_cmap },
+        name = 'pdfminer',
+        version = __version__,
+        description = 'PDF parser and analyzer',
+        long_description = long_description,
+        long_description_content_type = 'text/markdown',
+        license = 'MIT',
+        author = 'Yusuke Shinyama',
+        author_email = 'yusuke@shinyama.jp',
+        url = 'http://github.com/euske/pdfminer',
+        packages = [
+            'pdfminer',
+        ],
+        python_requires = '>=3.6',
+        install_requires = [
+            'pycryptodome',
+        ],
+        scripts = [
+            'tools/pdf2txt.py',
+            'tools/dumppdf.py',
+        ],
+        keywords = [
+            'pdf parser',
+            'pdf converter',
+            'layout analysis',
+            'text mining'
+        ],
+        classifiers = [
+            'Development Status :: 4 - Beta',
+            'Environment :: Console',
+            'Intended Audience :: Developers',
+            'Intended Audience :: Science/Research',
+            'License :: OSI Approved :: MIT License',
+            'Topic :: Text Processing',
+        ]
+    )

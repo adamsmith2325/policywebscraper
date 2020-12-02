@@ -31,9 +31,10 @@ keywords=[
 'Jail',
 'Correctional Facilities'
 ]
-with open('convertedexec.txt') as f:
-    txt=f.read()
-    for i in keywords:
+def readin(file)
+    with open(file) as f:
+        txt=f.read()
+        for i in keywords:
 
-        if re.search(r'\b{}\b'.format(i),txt):
-            print(i)
+            if re.search(r'\b{}\b'.format(i),txt):
+                print(i)
