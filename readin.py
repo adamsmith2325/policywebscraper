@@ -31,7 +31,7 @@ keywords=[
 'Jail',
 'Correctional Facilities'
 ]
-def readin(file)
+def readin(file):
     with open(file) as f:
         txt=f.read()
         for i in keywords:
